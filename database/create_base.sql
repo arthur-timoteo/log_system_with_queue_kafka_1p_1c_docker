@@ -1,0 +1,16 @@
+-- Install uuid-ossp
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE LOG_RECORD (
+    Pk UUID PRIMARY KEY NOT NULL,
+    Cod_Area_1 VARCHAR(50) NOT NULL,
+    Cod_Area_2 VARCHAR(50) NULL,
+    Cod_Team_1 VARCHAR(50) NULL,
+    Cod_Project_Area VARCHAR(50) NOT NULL,
+    Cod_Project_1 VARCHAR(50) NOT NULL,
+    Cod_Project_2 VARCHAR(50) NULL,
+    Type_Project VARCHAR(50) NOT NULL,
+    Type_Log VARCHAR(50) NOT NULL,
+    Description_Log VARCHAR(50) NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

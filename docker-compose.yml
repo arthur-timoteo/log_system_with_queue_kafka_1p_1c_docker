@@ -1,0 +1,13 @@
+services:
+  database:
+    image: postgres:13
+    container_name: lswqd-database-postgres-13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=log_records
+      - TZ=America/Sao_Paulo
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./database/create_base.sql:/docker-entrypoint-initdb.d/create_base.sql.sql:ro
