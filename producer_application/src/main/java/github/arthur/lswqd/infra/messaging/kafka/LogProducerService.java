@@ -1,5 +1,6 @@
 package github.arthur.lswqd.infra.messaging.kafka;
 
+import com.resources.avro.SchemaGeneralLog;
 import github.arthur.lswqd.entities.Log;
 import github.arthur.lswqd.usecases.abstractions.LoggerInterface;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,13 +13,16 @@ public class LogProducerService implements LoggerInterface {
     @Value("${app.kafka.topic}")
     private String topic;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final LogAvroMapper logAvroMapper;
 
-    public LogProducerService(KafkaTemplate<String, Object> kafkaTemplate) {
+    public LogProducerService(KafkaTemplate<String, Object> kafkaTemplate, LogAvroMapper logAvroMapper) {
         this.kafkaTemplate = kafkaTemplate;
+        this.logAvroMapper = logAvroMapper;
     }
 
     @Override
     public void log(Log log) {
-        kafkaTemplate.send(topic, log);
+        SchemaGeneralLog logAvro = logAvroMapper.toAvro(log);
+        kafkaTemplate.send(topic, logAvro);
     }
 }

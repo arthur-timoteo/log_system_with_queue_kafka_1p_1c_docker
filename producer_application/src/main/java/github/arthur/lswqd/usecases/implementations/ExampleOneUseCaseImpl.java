@@ -23,7 +23,10 @@ public class ExampleOneUseCaseImpl implements ExampleOneUseCaseInterface {
         var exampleOneEntity = exampleOneRepository.save(objectExampleOneEntity);
 
         Log log = new Log();
-        log.setPath("loren impsun text");
+        log.setTypeLog("INFO");
+        log.setTitle("Example One Use Case");
+        log.setPath("EOUCI-E-1");
+        log.setMessage("Done");
         logger.log(log);
     }
 }

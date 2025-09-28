@@ -2,27 +2,32 @@ package github.arthur.lswqd.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 public class Log {
-    private String solution;
-    private String application;
-    private String typeLog;
-    private String title;
-    private String message;
-    private String path;
+    @Getter
+    private String id, solution, application;
+    @Getter @Setter
+    private String typeLog, title, path, message;
+    @Getter
+    private LocalDateTime timestamp;
 
-    public Log(){}
+    public Log(){ startBasicParameter(); }
 
-    public Log(String solution, String application, String typeLog, String title, String message, String path){
-        this.solution = solution;
-        this.application = application;
+    public Log(String typeLog, String title, String message, String path){
+        startBasicParameter();
         this.typeLog = typeLog;
         this.title = title;
-        this.message = message;
         this.path = path;
+        this.message = message;
+    }
+
+    private void startBasicParameter(){
+        this.id = UUID.randomUUID().toString();
+        this.solution = "LSWQD";
+        this.application = "PRODUCER";
+        this.timestamp = LocalDateTime.now();
     }
 }
