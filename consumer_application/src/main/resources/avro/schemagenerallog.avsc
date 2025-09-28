@@ -1,0 +1,15 @@
+{
+    "namespace": "com.resources.avro",
+    "type": "record",
+    "name": "SchemaGeneralLog",
+    "fields": [
+        { "name": "id", "type": "string"},
+        { "name": "solution", "type": "string"},
+        { "name": "application", "type": "string"},
+        { "name": "type_log", "type": "string"},
+        { "name": "title", "type": "string"},
+        { "name": "path", "type": "string"},
+        { "name": "message", "type": "string"},
+        { "name": "timestamp", "type": "string"}
+    ]
+}
