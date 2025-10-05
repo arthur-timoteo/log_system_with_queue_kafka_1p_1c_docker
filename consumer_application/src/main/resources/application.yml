@@ -11,6 +11,11 @@ spring:
         specific.avro.reader: true
     listener:
       group-id: lswqd-consumer-app
+  datasource:
+    url: jdbc:postgresql://localhost:5432/log_records
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
 
 app:
   kafka:
