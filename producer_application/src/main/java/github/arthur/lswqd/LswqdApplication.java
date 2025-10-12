@@ -5,6 +5,8 @@ import github.arthur.lswqd.usecases.abstractions.ExampleOneUseCaseInterface;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @SpringBootApplication
 public class LswqdApplication {
 
@@ -14,9 +16,16 @@ public class LswqdApplication {
 		this.exampleOneUseCase = exampleOneUseCase;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		SpringApplication.run(LswqdApplication.class, args);
-		exampleOneUseCase.execute(new ExampleOneEntity(1, "loren inpsum"));
+
+		int executionsCount = 0;
+		while (executionsCount < 20){
+			exampleOneUseCase.execute(new ExampleOneEntity(1, "loren inpsum"));
+
+			executionsCount++;
+			Thread.sleep(ThreadLocalRandom.current().nextLong(5000, 15001));
+		}
 	}
 
 }
