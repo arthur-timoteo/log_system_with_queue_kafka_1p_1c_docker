@@ -7,6 +7,8 @@ import github.arthur.lswqd.usecases.abstractions.LoggerInterface;
 import github.arthur.lswqd.usecases.abstractions.repositories.ExampleOneRepositoryInterface;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @Service
 public class ExampleOneUseCaseImpl implements ExampleOneUseCaseInterface {
 
@@ -20,13 +22,18 @@ public class ExampleOneUseCaseImpl implements ExampleOneUseCaseInterface {
 
     @Override
     public void execute(ExampleOneEntity objectExampleOneEntity) {
-        var exampleOneEntity = exampleOneRepository.save(objectExampleOneEntity);
+        try {
+            logger.log(new Log("INFO", "Example One Use Case", "starting", "EOUCI-E-1"));
 
-        Log log = new Log();
-        log.setTypeLog("INFO");
-        log.setTitle("Example One Use Case");
-        log.setPath("EOUCI-E-1");
-        log.setMessage("Done");
-        logger.log(log);
+            var exampleOneEntity = exampleOneRepository.save(objectExampleOneEntity);
+
+            int randomNumber = ThreadLocalRandom.current().nextInt(3);
+            if(randomNumber == 2)
+                throw new Exception("An error occurred while trying to execute use case number 1");
+
+            logger.log(new Log("INFO", "Example One Use Case", "done", "EOUCI-E-2"));
+        } catch (Exception e) {
+            logger.log(new Log("ERROR", "Example One Use Case", e.toString(), "EOUCI-E-3"));
+        }
     }
 }
